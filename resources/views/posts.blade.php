@@ -32,6 +32,7 @@
            <div class="post">
                <h2>{{ $post->title }}</h2>
                <p>{{$post->content}}</p>
+               <p>{{$post->user->name}}</p>
            </div>
            @endforeach
     </body>
