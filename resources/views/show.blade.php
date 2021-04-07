@@ -18,23 +18,26 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
-            .post {
-                border: 1px solid;
-                border-radius: 1em;
-                margin: 2em;
-                width: 30%;
-                padding: 0.5em;
-            }
         </style>
     </head>
     <body class="antialiased">
-           @foreach ($posts as $post)
            <div class="post">
-               <h2>{{ $post->title }}</h2>
-               <p>{{$post->content}}</p>
-               <p>{{$post->user->name}}</p>
-               <a href="{{ route('posts.show', $post->id) }}">View</a>
-           </div>
-           @endforeach
+            <h1>{{ $post->title }}</h1>
+            <div>
+                <p>{{ $post->content }}</p>
+            </div>
+          </div>
+          @if ($editable)
+              <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+              <form action="{{ route('posts.destroy', $post->id) }}" method="post">
+                      {{ csrf_field() }}
+                      {{ method_field('DELETE') }}
+                          <div>
+                              <button>Delete</button>
+                          </div>
+
+                      </form>
+          @endif
+
     </body>
 </html>

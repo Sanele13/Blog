@@ -56,9 +56,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+       $user = $request->user();
+       $post = Post::find($id);
+       return view('show', ['post' => $post, 'editable'=>!is_null($user) && $user->id == $post->user_id]);
     }
 
     /**
@@ -112,8 +114,18 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        if (Auth::check()) {
+                           //The user is logged in...
+                           $user = $request->user();
+                           $post = Post::find($id);
+                           if ($user->id == $post->user_id) {
+                               $post->delete();
+                           }
+                            return redirect('/posts');
+                       } else {
+                           return redirect('/');
+                       }
     }
 }
