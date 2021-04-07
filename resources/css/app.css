@@ -1,0 +1,13 @@
+.btn-link {
+    font-weight: 400;
+    text-decoration: none;
+    color: white;
+    padding: 0.5em;
+    margin: 0.5em
+}
+.primary {
+    background-color: #007bff;
+}
+.danger {
+    background-color: red;
+}

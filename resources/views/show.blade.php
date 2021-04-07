@@ -18,7 +18,22 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            .btn-link {
+                font-weight: 400;
+                text-decoration: none;
+                color: white;
+                padding: 0.5em;
+                margin: 0.5em
+            }
+            .primary {
+                background-color: #007bff;
+            }
+            .danger {
+                background-color: red;
+            }
+
         </style>
+
     </head>
     <body class="antialiased">
            <div class="post">
@@ -28,12 +43,12 @@
             </div>
           </div>
           @if ($editable)
-              <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+              <a class="btn-link primary" href="{{ route('posts.edit', $post->id) }}">Edit</a>
               <form action="{{ route('posts.destroy', $post->id) }}" method="post">
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
                           <div>
-                              <button>Delete</button>
+                              <button class="btn-link danger">Delete</button>
                           </div>
 
                       </form>

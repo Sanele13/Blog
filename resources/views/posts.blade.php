@@ -25,6 +25,17 @@
                 width: 30%;
                 padding: 0.5em;
             }
+            .btn-link {
+                font-weight: 400;
+                text-decoration: none;
+                color: white;
+                padding: 0.5em;
+                margin: 0.5em
+            }
+            .primary {
+                background-color: #007bff;
+            }
+
         </style>
     </head>
     <body class="antialiased">
@@ -33,7 +44,7 @@
                <h2>{{ $post->title }}</h2>
                <p>{{$post->content}}</p>
                <p>{{$post->user->name}}</p>
-               <a href="{{ route('posts.show', $post->id) }}">View</a>
+               <a class="btn-link primary" href="{{ route('posts.show', $post->id) }}">View</a>
            </div>
            @endforeach
     </body>

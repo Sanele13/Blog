@@ -3,6 +3,22 @@
     <title>
         Edit Post
     </title>
+    <style>
+                body {
+                    font-family: 'Nunito', sans-serif;
+                }
+                .btn-link {
+                    font-weight: 400;
+                    text-decoration: none;
+                    color: white;
+                    padding: 0.5em;
+                    margin: 0.5em
+                }
+                .primary {
+                    background-color: #007bff;
+                }
+
+            </style>
 </head>
 <body>
 <div>
@@ -11,15 +27,15 @@
         {{ csrf_field() }}
         {{ method_field('PATCH') }}
             <div>
-                <label>Title</label>
+                <label>Title</label><br>
                 <input type="text" name="title" value="{{$post->title}}">
             </div>
             <div>
-                <label>Content</label>
-                <textarea name="content" cols="3" rows="5">{{$post->content}}</textarea>
+                <label>Content</label><br>
+                <textarea name="content" cols="30" rows="5">{{$post->content}}</textarea>
             </div>
             <div>
-                <button>Save</button>
+                <button class="btn-link primary">Save</button>
             </div>
 
         </form>
