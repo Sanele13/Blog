@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -24,7 +25,12 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('create');
+        if (Auth::check()) {
+            // The user is logged in...
+            return view('create');
+        } else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -61,9 +67,21 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        if (Auth::check()) {
+            // The user is logged in...
+            $user = $request->user();
+            $post = Post::find($id);
+            if ($user->id == $post->user_id) {
+                return view('edit', ['post' => $post]);
+            } else {
+                return redirect('/posts');
+            }
+        } else {
+            return redirect('/');
+        }
+
     }
 
     /**
@@ -75,7 +93,17 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       if (Auth::check()) {
+                   //The user is logged in...
+                   $user = $request->user();
+                   $post = Post::find($id);
+                   if ($user->id == $post->user_id) {
+                       $post->update($request->only('title','content'));
+                   }
+                    return redirect('/posts');
+               } else {
+                   return redirect('/');
+               }
     }
 
     /**
